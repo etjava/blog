@@ -8,7 +8,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="id" column="id"/>
 		<result property="userName" column="userName"/>
 		<result property="password" column="password"/>
+		<result property="profile" column="profile"/>
+		<result property="nickName" column="nickName"/>
+		<result property="sign" column="sign"/>
+		<result property="imageName" column="imageName"/>
 	</resultMap>
 	
+	<select id="findByUserName" parameterType="String" resultType="Users">
+		select * from t_user where userName=#{userName}
+	</select>
 	
 </mapper> 

@@ -20,4 +20,10 @@ public class UsersServiceImpl implements UsersService{
 		return usersMapper.findByUserName(userName);
 	}
 
+	@Override
+	public Users findById(Integer id) {
+		// TODO Auto-generated method stub
+		return usersMapper.findById(id);
+	}
+
 }

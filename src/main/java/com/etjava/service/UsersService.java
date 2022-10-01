@@ -10,4 +10,6 @@ import com.etjava.bean.Users;
 public interface UsersService {
 
 	Users findByUserName(String userName);
+	
+	Users findById(Integer id);
 }

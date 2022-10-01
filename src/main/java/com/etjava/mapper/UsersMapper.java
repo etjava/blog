@@ -16,4 +16,6 @@ public interface UsersMapper {
 	 */
 	Users findByUserName(String userName);
 	
+	Users findById(Integer id);
+	
 }

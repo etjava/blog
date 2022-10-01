@@ -21,7 +21,6 @@ public class MyRealm extends AuthorizingRealm{
 	
 	/**
 	 * Role Assignment (only one user)
-	 * 角色分配(当前项目没有用到 因为只有一个用户)
 	 */
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
@@ -31,7 +30,6 @@ public class MyRealm extends AuthorizingRealm{
 
 	/**
 	 * Validition Sign in
-	 * 登录验证
 	 */
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
@@ -39,9 +37,7 @@ public class MyRealm extends AuthorizingRealm{
 		String userName = (String)token.getPrincipal();
 		Users user = usersService.findByUserName(userName);
 		if(user!=null) {
-			// 把当前用户信息放到session中
 			SecurityUtils.getSubject().getSession().setAttribute("currentUser", user);
-			// 验证登录密码
 			AuthenticationInfo auth = new SimpleAuthenticationInfo(user.getUserName(), user.getPassword(),"others wirte");
 			return auth;
 		}else {

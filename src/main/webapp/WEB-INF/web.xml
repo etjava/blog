@@ -72,7 +72,7 @@
 		<servlet-name>springMVC</servlet-name>
 		<url-pattern>*.html</url-pattern>
 	</servlet-mapping>
-	
+	<!-- 初始化组件 -->
 	<listener>
 		<listener-class>com.etjava.service.impl.InitComponent</listener-class>
 	</listener>

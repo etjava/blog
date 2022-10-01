@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etjava.mapper.BlogTypeMapper">
+
+	<resultMap type="BlogType" id="BlogTypeResult">
+		<result property="id" column="id"/>
+		<result property="typeName" column="typeName"/>
+		<result property="orderNo" column="orderNo"/>
+	</resultMap>
+	
+	<select id="countList" resultType="BlogType">
+		SELECT
+		  a.id,
+		  a.typeName,
+		  COUNT(b.id) AS blogCount
+		FROM t_blogtype a
+		  LEFT JOIN t_blog b
+		    ON a.id = b.typeId
+		GROUP BY a.typeName
+		ORDER BY a.orderNo
+	</select>
+	
+	<select id="findById" parameterType="Integer" resultType="BlogType">
+		select * from t_blogtype where id=#{id}
+	</select>
+</mapper> 

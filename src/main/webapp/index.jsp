@@ -90,8 +90,8 @@
 				</div>
 				<div class="datas">
 					<ul>
-						<c:forEach var="blogTypeCount" items="${blogTypeCountList }">
-							<li><span><a href="#">${blogTypeCount.typeName }(${blogTypeCount.blogCount })</a></span></li>
+						<c:forEach var="blogTypeCount" items="${blogTypeList }">
+							<li><span><a href="#">${blogTypeCount.typeName }</a>&nbsp;(${blogTypeCount.blogCount })</span></li>
 						</c:forEach>
 					</ul>
 				</div>
@@ -106,8 +106,9 @@
 				</div>
 				<div class="datas">
 					<ul>
-							<li><span><a href="/index.html?releaseDateStr=2016年02月">2016年02月(11)</a></span></li>
-						
+						<c:forEach var="blog" items="${blogList }">
+							<li><span><a href="/index.html?releaseDateStr=${blog.releaseDateStr }">${blog.releaseDateStr }</a>&nbsp;(${blog.blogCount })</span></li>
+						</c:forEach>
 					</ul>
 				</div>
 			</div>

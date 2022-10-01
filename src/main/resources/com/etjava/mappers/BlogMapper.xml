@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.etjava.mapper.BlogMapper">
+
+	<resultMap type="Blog" id="BlogResult">
+		<result property="id" column="id"/>
+		<result property="title" column="title"/>
+		<result property="summary" column="summary"/>
+		<result property="releaseDate" column="releaseDate"/>
+		<result property="clickHit" column="clickHit"/>
+		<result property="replyHit" column="replyHit"/>
+		<result property="content" column="content"/>
+		<result property="keyword" column="keyword"/>
+		<!-- 主外键管理 property对应当前Bean中的属性，column是数据库中的外键  select执行的查询方法 -->
+		<association property="blogType" column="typeId" select="com.etjava.mapper.BlogTypeMapper.findById"></association>
+	</resultMap>
+	
+	<select id="countList" resultMap="BlogResult">
+		SELECT 
+			DATE_FORMAT(releaseDate , '%Y年%m月') AS releaseDateStr,
+			COUNT(1) AS blogCount
+		FROM t_blog 
+		GROUP BY
+			DATE_FORMAT(releaseDate , '%Y年%m月')
+			ORDER BY DATE_FORMAT(releaseDate , '%Y年%m月') DESC 
+	</select>
+	
+	
+</mapper> 

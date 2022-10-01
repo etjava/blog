@@ -1,5 +1,10 @@
 package com.etjava.bean;
 
+/**
+ * 友情链接实体类
+ * @author etjav
+ *
+ */
 public class Link {
 
 	private Integer id;

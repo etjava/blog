@@ -1,6 +1,8 @@
 package com.etjava.bean;
 
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * 博客内容
@@ -21,6 +23,9 @@ public class Blog {
 	private BlogType blogType;
 	private Integer blogCount;// 博客数量
 	private String releaseDateStr;
+	
+	// 存放博客内容中包含的图片信息 用来展示缩略图
+	private List<String> imageList = new LinkedList<>();
 
 	public Integer getId() {
 		return id;
@@ -109,6 +114,14 @@ public class Blog {
 
 	public void setReleaseDateStr(String releaseDateStr) {
 		this.releaseDateStr = releaseDateStr;
+	}
+
+	public List<String> getImageList() {
+		return imageList;
+	}
+
+	public void setImageList(List<String> imageList) {
+		this.imageList = imageList;
 	}
 
 	@Override

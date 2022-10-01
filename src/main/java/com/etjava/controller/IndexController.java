@@ -7,6 +7,10 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,6 +40,23 @@ public class IndexController {
 		map.put("size", pageBean.getPageSize());
 		
 		List<Blog> list = blogService.list(map);
+		// 提取内容中的所有图片
+		for(Blog blog:list) {
+			List<String> imageList = blog.getImageList();
+			String blogInfo = blog.getContent();
+			// Jsoup 解析内容中图片信息 (内容是带有html标签的)
+			Document doc = Jsoup.parse(blogInfo);
+			// 解析img元素中后缀为jpg的元素    不加[src$=.jpg] 表示获取所有img标签
+			Elements elements = doc.select("img[src$=.jpg]");
+			for(int i=0;i<elements.size();i++) {
+				if(i==3) { // 最多只选三张图片
+					break; 
+				}
+				Element element = elements.get(i);
+				// element.toString() 对应的图片访问路径
+				imageList.add(element.toString());
+			}
+		}
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("pageTitle","ETJAVA BLOG");

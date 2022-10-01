@@ -1,7 +1,7 @@
 package com.etjava.bean;
 
 /**
- * ²©Ö÷ĞÅÏ¢ÊµÌå
+ *åšä¸»ä¿¡æ¯å®ä½“ç±»
  * @author etjav
  *
  */
@@ -10,10 +10,10 @@ public class Users {
 	private Integer id;
 	private String userName;
 	private String password;
-	private String profile; // ¼ò½é
-	private String nickName; // êÇ³Æ
-	private String sign; // ¸öĞÔÇ©Ãû
-	private String imageName; // Í·ÏñÂ·¾¶
+	private String profile; // ç®€ä»‹
+	private String nickName; // æ˜µç§°
+	private String sign; // ä¸ªæ€§ç­¾å
+	private String imageName; // å¤´åƒåç§°
 	
 	
 	public Integer getId() {

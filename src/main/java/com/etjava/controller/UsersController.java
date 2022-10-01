@@ -17,7 +17,7 @@ import com.etjava.util.CryptographyUtil;
 
 /**
  * the controller of blog personal 
- * 博主信息controller
+ * 鍗氫富淇℃伅controller
  * 
  * @author etjav
  *
@@ -33,18 +33,16 @@ public class UsersController {
 	
 	@RequestMapping("/login")
 	public String login(Users user,HttpServletRequest req) {
-		// shiro中获取当前用户
 		Subject subject = SecurityUtils.getSubject();
-		// 封装用户名和密码的token
 		UsernamePasswordToken token = new UsernamePasswordToken(user.getUserName(),CryptographyUtil.md5(user.getPassword(), "etjava") );
 		try {
-			// 登录验证 - 会调用MyRealm中doGetAuthenticationInfo进行验证
+			
 			subject.login(token);
-			logger.info("["+user+"] 登录成功");
+			logger.info("["+user+"] 鐧诲綍鎴愬姛");
 			return "redirect:/admin/main.jsp";
 		} catch (Exception e) {
-			logger.error("用户["+user+"]登录失败 ："+e.getMessage());
-			req.setAttribute("errorInfo", "用户名或密码错误");
+			logger.error("["+user+"]鐧诲綍澶辫触"+e.getMessage());
+			req.setAttribute("errorInfo", "鐢ㄦ埛鍚嶆垨瀵嗙爜閿欒");
 			req.setAttribute("blogger", user);
 			return "login";
 		}

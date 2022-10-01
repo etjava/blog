@@ -3,11 +3,12 @@ package com.etjava.service;
 import com.etjava.bean.Users;
 
 /**
- * 博主信息Service接口
- * @author etjav
+ * @author etjava
  *
  */
 public interface UsersService {
 
 	Users findByUserName(String userName);
+	
+	Users findById(Integer id);
 }

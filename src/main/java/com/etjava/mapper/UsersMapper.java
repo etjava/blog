@@ -3,17 +3,14 @@ package com.etjava.mapper;
 import com.etjava.bean.Users;
 
 /**
- * ²©Ö÷ĞÅÏ¢DAO(mapper)½Ó¿Ú
+ * åšä¸»ä¿¡æ¯Mapper(daoå±‚)
  * @author etjav
  *
  */
 public interface UsersMapper {
 
-	/**
-	 * ¸ù¾İuserName²éÕÒÓÃ»§
-	 * @param userName
-	 * @return
-	 */
 	Users findByUserName(String userName);
+	
+	Users findById(Integer id);
 	
 }

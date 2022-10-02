@@ -65,7 +65,7 @@ public class InitComponent implements ApplicationContextAware,ServletContextList
 		// By Date
 		BlogService blogService = (BlogService)ac.getBean("blogService");
 		List<Blog> blogList = blogService.countList();
-		application.setAttribute("blogList", blogList);
+		application.setAttribute("blogCountList", blogList);
 		logger.info("初始化组件加载完成............ ");
 	}
 

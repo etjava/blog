@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.etjava.bean.Users;
 import com.etjava.service.UsersService;
@@ -46,6 +47,15 @@ public class UsersController {
 			req.setAttribute("blogger", user);
 			return "login";
 		}
+	}
+	
+	@RequestMapping("/about")
+	public ModelAndView about(HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView();
 		
+		mav.addObject("pageTitle","About");
+		mav.addObject("mainPage", "foreground/blog/info.jsp");
+		mav.setViewName("template");
+		return mav;
 	}
 }

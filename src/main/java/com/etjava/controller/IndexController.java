@@ -30,7 +30,11 @@ public class IndexController {
 	private BlogService blogService;
 	
 	@RequestMapping("/index")
-	public ModelAndView index(@RequestParam(value="page",required = false) String page,HttpServletRequest req) throws Exception {
+	public ModelAndView index(@RequestParam(value="page",required = false) String page,
+			@RequestParam(value="typeId",required = false) String typeId,
+			@RequestParam(value="releaseDateStr",required = false) String releaseDateStr,
+			HttpServletRequest req) throws Exception {
+		
 		if(StringUtil.isEmpty(page)) {
 			page="1";
 		}
@@ -38,6 +42,8 @@ public class IndexController {
 		Map<String,Object> map = new HashMap<>();
 		map.put("start", pageBean.getStart());
 		map.put("size", pageBean.getPageSize());
+		map.put("releaseDateStr", releaseDateStr);
+		map.put("typeId", typeId);
 		
 		List<Blog> list = blogService.list(map);
 		// 提取内容中的所有图片
@@ -64,13 +70,17 @@ public class IndexController {
 		
 		// 分页页码
 		StringBuffer parm = new StringBuffer();
+		if(StringUtil.isNotEmpty(typeId)) {
+			parm.append("typeId="+typeId+"&");
+		}
+		if(StringUtil.isNotEmpty(releaseDateStr)) {
+			parm.append("releaseDateStr="+releaseDateStr+"&");
+		}
+		
 		mav.addObject("pageCode",
 				PageUtil.genPagination(req.getContextPath()+"/index.html", 
 						blogService.total(map), Integer.parseInt(page)
 						, 10, parm.toString()));
-		
-		
-		
 		
 		/*
 		 * template include content.jsp ->

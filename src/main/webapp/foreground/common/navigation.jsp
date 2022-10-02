@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <div class="row">
 		<div class="col-md-12" style="padding-top: 5px;"><!-- navbar-fixed-top  固定在顶部 -->
@@ -6,14 +6,15 @@
 			  <div class="container-fluid">
 			    <!-- Brand and toggle get grouped for better mobile display -->
 			    <div class="navbar-header">
-			      <a class="navbar-brand" href="#"><font color="#FFF"><strong>首页</strong></font></a>
+			      <a class="navbar-brand" href="${pageContext.request.contextPath}/index.html"><font color="#FFF"><strong>Home</strong></font></a>
 			    </div>
 			
 			    <!-- Collect the nav links, forms, and other content for toggling -->
 			    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-12">
 			      <ul class="nav navbar-nav">
-			        <li><a href="#"><font color="#FFF"><strong>关于博主</strong></font></a></li>
-			        <li><a href="#"><font color="#FFF"><strong>本站源码下载</strong></font></a></li>
+			        <li><a href="${pageContext.request.contextPath}/blogger/about.html"><font color="#FFF"><strong>About</strong></font></a></li>
+			        <li><a href="${pageContext.request.contextPath}/download.html"><font color="#FFF"><strong>Download</strong></font></a></li>
+			        <li><a href="${pageContext.request.contextPath}/music.html"><font color="#FFF"><strong>Music</strong></font></a></li>
 			      </ul>
 			      <form class="navbar-form navbar-right" role="search">
 			        <div class="form-group">
@@ -24,7 +25,12 @@
 			    </div><!-- /.navbar-collapse -->
 			  </div><!-- /.container-fluid -->
 			  <div class="row no-gutters" style="height:80px; background-color: #665F5B;">
-				<div class="col-md-12" >&nbsp;</div>
+				<div class="col-md-11" >
+					
+				</div>
+				<div class="col-md-1">
+				<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=80 height=86 src="//music.163.com/outchain/player?type=2&id=1964496436&auto=0&height=66"></iframe>
+				</div>
 			</div>
 			</nav>
 		</div>

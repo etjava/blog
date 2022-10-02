@@ -65,8 +65,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="clickHit!=null">
 				clickHit=#{clickHit},
 			</if>
+			<if test="replyHit!=null">
+				replyHit=#{replyHit},
+			</if>
 		</set>
 		where id=#{id}
 	</update>
+	
+	<select id="lastBlog" parameterType="Integer" resultType="Blog">
+	select * from t_blog where id &lt; #{id} order by id desc limit 1
+	</select>
+	
+	<select id="nextBlog" parameterType="Integer" resultType="Blog">
+	select * from t_blog where id &gt; #{id} order by id limit 1
+	</select>
 	
 </mapper> 

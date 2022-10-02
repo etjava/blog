@@ -46,4 +46,16 @@ public class BlogServiceimpl implements BlogService {
 		return blogMapper.update(blog);
 	}
 
+	@Override
+	public Blog lastBlog(Integer id) {
+		// TODO Auto-generated method stub
+		return blogMapper.lastBlog(id);
+	}
+
+	@Override
+	public Blog nextBlog(Integer id) {
+		// TODO Auto-generated method stub
+		return blogMapper.nextBlog(id);
+	}
+
 }

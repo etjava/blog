@@ -11,7 +11,7 @@ public class DownloadController {
 	@RequestMapping("/download")
 	public ModelAndView download() {
 		ModelAndView mav = new ModelAndView();
-		mav.addObject("pageTitle","download");
+		mav.addObject("pageTitle","download - ETJAVA Blog");
 		mav.addObject("mainPage","foreground/blog/download.jsp");
 		mav.setViewName("template");
 		return mav;

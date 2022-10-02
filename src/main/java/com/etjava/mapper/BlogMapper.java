@@ -26,4 +26,8 @@ public interface BlogMapper {
 	 * @return
 	 */
 	Integer total(Map<String,Object> map);
+	
+	Blog findbyId(Integer id);
+	
+	Integer update(Blog blog);
 }

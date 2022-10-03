@@ -58,4 +58,12 @@ public class BlogServiceimpl implements BlogService {
 		return blogMapper.nextBlog(id);
 	}
 
+	@Override
+	public Integer add(Blog blog) {
+		// TODO Auto-generated method stub
+		return blogMapper.add(blog);
+	}
+	
+	
+
 }

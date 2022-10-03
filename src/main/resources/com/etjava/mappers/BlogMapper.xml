@@ -80,4 +80,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select * from t_blog where id &gt; #{id} order by id limit 1
 	</select>
 	
+	<insert id="add" parameterType="Blog">
+		insert into t_blog values(null,#{title},#{summary},now(),0,0,#{content},#{blogType.id},#{keyword})
+	</insert>
+	
 </mapper> 

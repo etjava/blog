@@ -32,4 +32,6 @@ public interface BlogService {
 	
 	// 上一篇博客
 	Blog nextBlog(Integer id);
+	
+	Integer add(Blog blog);
 }

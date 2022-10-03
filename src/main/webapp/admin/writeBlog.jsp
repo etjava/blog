@@ -40,6 +40,7 @@ var ue = UE.getEditor('editor',{
         }else{
             $.post("${pageContext.request.contextPath}/admin/blog/save.html",{'title':title,'blogType.id':blogTypeId,
                 'content':content,'summary':UE.getEditor('editor').getContentTxt().substr(0,155),
+                'contentNoTag':UE.getEditor('editor').getContentTxt(),
                 'keyWord':keyWord},function(result){
                 if(result.success){
                     alert("博客发布成功！");

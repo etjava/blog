@@ -80,7 +80,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select * from t_blog where id &gt; #{id} order by id limit 1
 	</select>
 	
-	<insert id="add" parameterType="Blog">
+	<!-- useGeneratedKeys="true" keyProperty="id" 新增数据后返回新增数据的ID -->
+	<insert id="add" useGeneratedKeys="true" keyProperty="id" parameterType="Blog">
 		insert into t_blog values(null,#{title},#{summary},now(),0,0,#{content},#{blogType.id},#{keyword})
 	</insert>
 	

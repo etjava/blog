@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.etjava.bean.Blog;
 import com.etjava.bean.Status;
+import com.etjava.lucene.ContentLucene;
 import com.etjava.service.BlogService;
 import com.etjava.util.ResponseUtil;
 
@@ -19,6 +20,8 @@ public class AdminController {
 
 	@Resource
 	private BlogService blogService;
+	
+	private ContentLucene index = new ContentLucene();
 	
 	/**
 	 *  添加或修改博客信息
@@ -33,6 +36,7 @@ public class AdminController {
 		if(blog.getId()==null) {
 			// insert
 			total = blogService.add(blog);
+			index.addIndex(blog);// 创建分词 用于全文检索
 		}else {
 			// update
 		}

@@ -55,6 +55,9 @@
 	margin-top:20px;
 	padding-bottom: 30px;
 	padding-left:50px;
+	
+	word-break:break-all; 
+	width:100%;
 }
 
 .data_list .blog_share{
@@ -199,7 +202,6 @@
 			<div class="publishButton">
 				<button class="btn btn-success" type="button" onclick="submitData()">Comment</button>
 			</div>
-		</form>
 	</div>
 </div>
 </div>

@@ -24,5 +24,7 @@
 		  	</c:choose>
 		  </ul>
 		</div>
+		
+		${pageCode }
 </div>
 </div>

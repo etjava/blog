@@ -37,26 +37,6 @@ public class BlogController {
 	private Logger logger = LoggerFactory.getLogger(BlogController.class);
 	
 	
-	/**
-	 * 	检索博客信息
-	 * @param keyword
-	 * @return
-	 * @throws Exception
-	 */
-	@RequestMapping("/search")
-	public ModelAndView search(@RequestParam(value="keyword",required = false) String keyword) throws Exception{
-		ModelAndView mav = new ModelAndView();
-		List<Blog> list = index.search(keyword);
-		mav.addObject("blogList",list);
-		mav.addObject("keyword",keyword);
-		mav.addObject("resultTotal",list.size());
-		mav.addObject("pageTitle", "search '"+keyword+"' - ETJAVA Blog");
-		mav.addObject("mainPage","foreground/blog/search.jsp");
-		mav.setViewName("template");
-		logger.info("搜索 ["+keyword+"] 找到 "+list.size()+" 条内容");
-		return mav;
-	}
-	
 	/*
 	 * /articles/{id} 请求后边的id 是获取的@PathVariable("id")里面的值  这个值是点击链接访问的时候传递过来的
 	 */
@@ -110,6 +90,72 @@ public class BlogController {
 			pageCode.append("<p>Next:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nothing</p>");
 		}else{
 			pageCode.append("<p>Next:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href='"+projectContext+"/blog/articles/"+nextBlog.getId()+".html'>"+nextBlog.getTitle()+"</a></p>");
+		}
+		return pageCode.toString();
+	}
+	
+	/**
+	 * 根据关键字查询相关博客信息
+	 * @param q
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/search")
+	public ModelAndView search(@RequestParam(value="keyword",required=false) String keyword,
+			@RequestParam(value="page",required=false) String page,HttpServletRequest request)throws Exception{
+		int pageSize=10;
+		if(StringUtil.isEmpty(page)){
+			page="1";
+		}
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("pageTitle", "search '"+keyword+"' - ETJAVA BLOG");
+		mav.addObject("mainPage", "foreground/blog/search.jsp");
+		List<Blog> blogList=index.search(keyword);
+		/*
+		 toIndex = blogList.size()>=Integer.parseInt(page)*pageSize?Integer.parseInt(page)*pageSize:blogList.size(); 
+		 例如 25条数据 每页显示10条
+		 第一页 toIndex = 25>=(1*10)?:(1*10):25
+		 第二页 toIndex = 25>=(2*10)?:(2*10):25
+		 第三页 toIndex = 25>=(3*10)?:(3*10):25
+		 */
+		Integer toIndex=blogList.size()>=Integer.parseInt(page)*pageSize?Integer.parseInt(page)*pageSize:blogList.size();
+		mav.addObject("blogList", blogList.subList((Integer.parseInt(page)-1)*pageSize, toIndex));
+		mav.addObject("pageCode",this.genUpAndDownPageCode(Integer.parseInt(page), blogList.size(), keyword, pageSize, request.getServletContext().getContextPath()));
+		mav.addObject("keyword", keyword);
+		mav.addObject("resultTotal", blogList.size());
+		mav.setViewName("template");
+		return mav;
+	}
+	
+	/**
+	 * 获取上一页，下一页代码 
+	 * @param page
+	 * @param totalNum
+	 * @param q
+	 * @param pageSize
+	 * @param projectContext
+	 * @return
+	 */
+	private String genUpAndDownPageCode(Integer page,Integer totalNum,String keyword,Integer pageSize,String projectContext){
+		long totalPage=totalNum%pageSize==0?totalNum/pageSize:totalNum/pageSize+1;
+		StringBuffer pageCode=new StringBuffer();
+		if(totalPage==0){
+			return "";
+		}else{
+			pageCode.append("<nav>");
+			pageCode.append("<ul class='pager'>");
+			if(page>1){
+				pageCode.append("<li><a href='"+projectContext+"/blog/search.html?page="+(page-1)+"&keyword="+keyword+"'>Previous</a></li>");
+			}else{
+				pageCode.append("<li class='disabled'><a href='#'>Previous</a></li>");
+			}
+			if(page<totalPage){
+				pageCode.append("<li><a href='"+projectContext+"/blog/search.html?page="+(page+1)+"&keyword="+keyword+"'>Next</a></li>");
+			}else{
+				pageCode.append("<li class='disabled'><a href='#'>Next</a></li>");
+			}
+			pageCode.append("</ul>");
+			pageCode.append("</nav>");
 		}
 		return pageCode.toString();
 	}

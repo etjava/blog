@@ -1,6 +1,6 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/ueditor/third-party/SyntaxHighlighter/shCore.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/static/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css">
-
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/alt.js"></script>
 <script type="text/javascript">
     SyntaxHighlighter.all();
     function showOtherComment(){
@@ -16,13 +16,13 @@
     	var content=$("#content").val();
     	var imageCode=$("#imageCode").val();
     	if(content==null || content==""){
-    		commonUtil.message("请输入评论内容！");
+    		commonUtil.message("请输入评论内容！","danger");
     	}else if(imageCode==null || imageCode==""){
-    		alert("请填写验证码！");
+    		commonUtil.message("请填写验证码！","danger");
     	}else{
     		$.post("${pageContext.request.contextPath}/comment/save.html",{"content":content,'imageCode':imageCode,'blog.id':'${blog.id}'},function(result){
     			if(result.success){
-    				commonUtil.message("评论已提成成功，审核通过后显示！");
+    				commonUtil.message("评论已提成成功，审核通过后显示！","success");
     			}else{
     				alert(result.errorInfo);
     			}

@@ -15,8 +15,9 @@
         // 创建bootstrap的alert元素
         var divElement = $("<div></div>").addClass('alert').addClass('alert-'+type).addClass('alert-dismissible').addClass('col-md-4').addClass('col-md-offset-4');
         divElement.css({ // 消息框的定位样式
-            "position": "absolute",
-            "top": "80px"
+            "position": "fixed",
+            "top": "16px",
+            "text-align":"center"
         });
         divElement.text(msg); // 设置消息框的内容
         // 消息框添加可以关闭按钮
@@ -32,20 +33,20 @@
      * @param msg 消息内容
      * @param type 消息框类型
      */
-    message: function(msg, type) {
+    message:function(msg, type) {
         var divElement = commonUtil.alert(msg, type); // 生成Alert消息框
         var isIn = false; // 鼠标是否在消息框中
  
         /*在setTimeout执行之前先判定鼠标是否在消息框中*/
-        divElement.on({ 
+        /*divElement.on({ 
         	mouseover : function(){isIn = true;},
            　　		mouseout : function(){isIn = false;}
-        });
+        });*/
  
         // 短暂延时后上浮消失
         setTimeout(function() {
             var IntervalMS = 20; // 每次上浮的间隔毫秒
-            var floatSpace = 60; // 上浮的空间(px)
+            var floatSpace = 80; // 上浮的空间(px)
             var nowTop = divElement.offset().top; // 获取元素当前的top值
             var stopTop = nowTop - floatSpace;    // 上浮停止时的top值
             divElement.fadeOut(IntervalMS * floatSpace); // 设置元素淡出
@@ -78,6 +79,6 @@
                     }
                 }, IntervalMS);
             });
-           }, 1500);
+           }, 2000);
     }
 }

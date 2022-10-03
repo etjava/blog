@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -45,6 +46,8 @@ public class IndexController {
 		map.put("releaseDateStr", releaseDateStr);
 		map.put("typeId", typeId);
 		
+		// 如果页面出现带有html标签的内容 在list这里获取数据时进行转义就好了
+		// 使用 StringEscapeUtils.escapeHtml(str) 将html标签转义
 		List<Blog> list = blogService.list(map);
 		// 提取内容中的所有图片
 		for(Blog blog:list) {

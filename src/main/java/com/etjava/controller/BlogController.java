@@ -45,6 +45,10 @@ public class BlogController {
 		ModelAndView mav = new ModelAndView();
 		Blog blog = blogService.findbyId(id);
 		
+		if(blog==null) {
+			request.setAttribute("errorMsg", "java.lang.NullPointerException");
+		}
+		
 		String keyword = blog.getKeyword();
 		if(StringUtil.isNotEmpty(keyword)) {
 			String[] data = keyword.split(" ");

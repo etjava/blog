@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer;
 import org.apache.lucene.document.Document;
@@ -117,7 +118,8 @@ public class ContentLucene {
 			Blog blog=new Blog();
 			blog.setId(Integer.parseInt(doc.get("id")));
 			String title=doc.get("title");
-			String content=doc.get("content");
+			// apache公共包提供的 转换html标签
+			String content=StringEscapeUtils.escapeHtml(doc.get("content")) ;
 			blog.setReleaseDateStr(doc.get("releaseDate"));
 			if(title!=null){
 				TokenStream tokenStream=analyzer.tokenStream("title", new StringReader(title));

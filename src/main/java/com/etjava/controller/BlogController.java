@@ -8,13 +8,17 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.etjava.bean.Blog;
 import com.etjava.bean.Comment;
+import com.etjava.lucene.ContentLucene;
 import com.etjava.service.BlogService;
 import com.etjava.service.CommentService;
 import com.etjava.util.StringUtil;
@@ -27,6 +31,31 @@ public class BlogController {
 	private BlogService blogService;
 	@Resource
 	private CommentService commentService;
+	
+	private ContentLucene index = new ContentLucene();
+	
+	private Logger logger = LoggerFactory.getLogger(BlogController.class);
+	
+	
+	/**
+	 * 	检索博客信息
+	 * @param keyword
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/search")
+	public ModelAndView search(@RequestParam(value="keyword",required = false) String keyword) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		List<Blog> list = index.search(keyword);
+		mav.addObject("blogList",list);
+		mav.addObject("keyword",keyword);
+		mav.addObject("resultTotal",list.size());
+		mav.addObject("pageTitle", "search '"+keyword+"' - ETJAVA Blog");
+		mav.addObject("mainPage","foreground/blog/search.jsp");
+		mav.setViewName("template");
+		logger.info("搜索 ["+keyword+"] 找到 "+list.size()+" 条内容");
+		return mav;
+	}
 	
 	/*
 	 * /articles/{id} 请求后边的id 是获取的@PathVariable("id")里面的值  这个值是点击链接访问的时候传递过来的
@@ -57,6 +86,8 @@ public class BlogController {
 		mav.addObject("pageTitle",blog.getTitle()+" - ETJAVA Blog");
 		mav.addObject("mainPage","foreground/blog/view.jsp");
 		mav.setViewName("template");
+		
+		logger.info("查看 id = "+id+" title = "+blog.getTitle()+" 的博客内容 ");
 		return mav;
 	}
 	

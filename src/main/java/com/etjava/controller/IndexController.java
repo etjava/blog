@@ -7,7 +7,6 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang.StringEscapeUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -18,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.etjava.bean.Blog;
+import com.etjava.bean.Music;
 import com.etjava.bean.PageBean;
 import com.etjava.service.BlogService;
+import com.etjava.service.MusicService;
 import com.etjava.util.PageUtil;
 import com.etjava.util.StringUtil;
 
@@ -29,6 +30,9 @@ public class IndexController {
 
 	@Resource
 	private BlogService blogService;
+	
+	@Resource
+	private MusicService musicService;
 	
 	@RequestMapping("/index")
 	public ModelAndView index(@RequestParam(value="page",required = false) String page,
@@ -91,6 +95,17 @@ public class IndexController {
 		 */
 		mav.addObject("mainPage","foreground/common/content.jsp");
 		mav.setViewName("template"); // template.jsp  但 springMVC 中做了映射 这里可以不需要在写后缀名了
+		return mav;
+	}
+	
+	@RequestMapping("/music")
+	public ModelAndView list() {
+		ModelAndView mav = new ModelAndView();
+		List<Music> list = musicService.findAll(null);
+		mav.addObject("musicList",list);
+		mav.addObject("pageTitle","Music - ETJAVA BLOG");
+		mav.addObject("mainPage","foreground/music/list.jsp");
+		mav.setViewName("template");
 		return mav;
 	}
 }

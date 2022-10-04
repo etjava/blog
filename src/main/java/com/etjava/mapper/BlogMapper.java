@@ -40,4 +40,6 @@ public interface BlogMapper {
 	Integer add(Blog blog);
 	
 	Integer delete(Integer id);
+	
+	Integer countByTypeId(Integer typeId);
 }

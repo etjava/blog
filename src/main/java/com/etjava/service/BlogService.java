@@ -36,4 +36,6 @@ public interface BlogService {
 	Integer add(Blog blog);
 	
 	Integer delete(Integer id);
+	
+	Integer countByTypeId(Integer typeId);
 }

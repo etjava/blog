@@ -91,7 +91,8 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/delete")
-	public void delete(@RequestParam(value="ids",required = true) String ids,HttpServletResponse response) throws Exception {
+	public void delete(@RequestParam(value="ids",required = true) String ids,
+			HttpServletResponse response) throws Exception {
 		String[] data = ids.split(",");
 		Integer  res = 0;
 		for(int i = 0;i<data.length;i++) {

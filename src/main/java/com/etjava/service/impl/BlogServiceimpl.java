@@ -69,6 +69,12 @@ public class BlogServiceimpl implements BlogService {
 		// TODO Auto-generated method stub
 		return blogMapper.delete(id);
 	}
+
+	@Override
+	public Integer countByTypeId(Integer typeId) {
+		// TODO Auto-generated method stub
+		return blogMapper.countByTypeId(typeId);
+	}
 	
 	
 

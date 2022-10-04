@@ -111,4 +111,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from t_blog where id=#{id}
 	</delete>
 	
+	<select id="countByTypeId" parameterType="Integer" resultType="Integer">
+		select count(1) from t_blog where typeId=#{typeId}
+	</select>
+	
 </mapper> 

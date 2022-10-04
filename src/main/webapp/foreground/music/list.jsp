@@ -91,7 +91,7 @@
 		Music
 	</div>
 	<div>
-		<div class="blog_title"><h3><strong>XXXXX</strong></h3></div>
+		<div class="blog_title"><h3><strong></strong></h3></div>
 		<div class="blog_content">
 		<table class="table">
 		  <tr align="center">

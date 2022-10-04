@@ -33,6 +33,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="typeId!=null and typeId!='' ">
 				and typeId=#{typeId}
 			</if>	
+			<if test="title!=null and title!='' ">
+				and title like #{title}
+			</if>
 			<if test="releaseDateStr!=null and releaseDateStr!='' ">
 				and DATE_FORMAT(releaseDate , '%Y年%m月')=#{releaseDateStr}
 			</if>	
@@ -49,6 +52,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="typeId!=null and typeId!='' ">
 				and typeId=#{typeId}
 			</if>	
+			<if test="title!=null and title!='' ">
+				and title like #{title}
+			</if>
 			<if test="releaseDateStr!=null and releaseDateStr!='' ">
 				and DATE_FORMAT(releaseDate , '%Y年%m月')=#{releaseDateStr}
 			</if>	
@@ -84,5 +90,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="add" useGeneratedKeys="true" keyProperty="id" parameterType="Blog">
 		insert into t_blog values(null,#{title},#{summary},now(),0,0,#{content},#{blogType.id},#{keyword})
 	</insert>
+	
+	<delete id="delete" parameterType="Integer">
+		delete from t_blog where id=#{id}
+	</delete>
 	
 </mapper> 

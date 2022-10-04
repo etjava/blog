@@ -38,4 +38,6 @@ public interface BlogMapper {
 	Blog nextBlog(Integer id);
 	
 	Integer add(Blog blog);
+	
+	Integer delete(Integer id);
 }

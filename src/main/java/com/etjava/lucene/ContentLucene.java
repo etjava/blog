@@ -17,6 +17,7 @@ import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
+import org.apache.lucene.index.Term;
 import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
@@ -148,5 +149,18 @@ public class ContentLucene {
 			list.add(blog);
 		}
 		return list;
+	}
+	
+	/**
+	 * 	删除指定博客的lucene索引
+	 */
+	public void deleteIndex(String blogId) throws Exception{
+		IndexWriter writer = getWriter();
+		writer.deleteDocuments(new Term("id",blogId));
+		// 强制删除 - 不强制删除 不会立即删除
+		writer.forceMergeDeletes();
+		
+		writer.commit();
+		writer.close();
 	}
 }

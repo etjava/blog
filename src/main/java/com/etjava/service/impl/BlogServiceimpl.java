@@ -63,6 +63,12 @@ public class BlogServiceimpl implements BlogService {
 		// TODO Auto-generated method stub
 		return blogMapper.add(blog);
 	}
+
+	@Override
+	public Integer delete(Integer id) {
+		// TODO Auto-generated method stub
+		return blogMapper.delete(id);
+	}
 	
 	
 

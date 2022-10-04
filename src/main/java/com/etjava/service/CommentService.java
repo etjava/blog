@@ -14,4 +14,6 @@ public interface CommentService {
 	Integer total(Map<String,Object> map);
 	
 	Integer update(Comment comment);
+	
+	Integer delete(Integer id);
 }

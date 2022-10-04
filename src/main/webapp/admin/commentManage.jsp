@@ -20,7 +20,38 @@
 		}
 	}
 	
-	function commentReview(state){
+	function changeReview(val,row){
+		debugger
+		var v = val.substr(0,50);
+		return "<a href='javascript:;' onclick='openReviewDialog("+row+")' >"+v+"</a>";
+	}
+	
+	function openReviewDialog(o){
+		debugger
+		$("#dlg").dialog("open").dialog("setTitle","查看评论信息");
+		$("#content").val(o.content);
+		$("#blogName").val('dasda');
+	}
+	
+	
+	function closedDlg(){
+		$("#dlg").dialog("close");
+		$("#blogName").val('');
+		$("#content").val('');
+		$("#dg").datagrid("reload");
+		
+	}
+	function formatState(val,row){
+		if(val==0){
+			return "<font color=blue >待审核</font>"
+		}else if(val==1){
+			return "<font color=green >审核通过</font>"
+		}else if(val==2){
+			return "<font color=red >审核驳回</font>"
+		}
+	}
+	
+	function deleteReview(state){
 		var selectedRows=$("#dg").datagrid("getSelections");
 		if(selectedRows.length==0){
 			$.messager.alert("系统提示","请选择要审核的数据！");
@@ -33,12 +64,12 @@
 		var ids=strIds.join(",");
 		$.messager.confirm("系统提示","您确定要审核这<font color=red>"+selectedRows.length+"</font>条数据吗？",function(r){
 			if(r){
-				$.post("${pageContext.request.contextPath}/admin/comment/review.html",{ids:ids,state:state},function(result){
+				$.post("${pageContext.request.contextPath}/admin/comment/delete.html",{ids:ids},function(result){
 					if(result.success){
-						$.messager.alert("系统提示","审核完成！");
+						$.messager.alert("系统提示","删除成功！");
 						$("#dg").datagrid("reload");
 					}else{
-						$.messager.alert("系统提示","提交失败");
+						$.messager.alert("系统提示","删除失败");
 					}
 				},"json");
 			}
@@ -48,9 +79,9 @@
 </script>
 </head>
 <body style="margin: 1px">
-<table id="dg" title="博客评论审核管理" class="easyui-datagrid" 
+<table id="dg" title="博客评论管理" class="easyui-datagrid" 
   fitColumns="true" pagination="true" rownumbers="true"
-  url="${pageContext.request.contextPath}/admin/comment/list.html?state=0" fit="true" 
+  url="${pageContext.request.contextPath}/admin/comment/list.html" fit="true" 
   toolbar="#tb" scrollbarSize=0  
   data-options="striped:true">
   <!-- 
@@ -64,16 +95,44 @@
   		<th field="id" width="20" align="center">编号</th>
   		<th field="blog" width="200" align="center" formatter="formatBlogTitle">博客名称</th>
   		<th field="userAddr" width="50" align="center">用户IP</th>
-  		<th field="content" width="200" align="center">评论内容</th>
+  		<th field="content" width="200" align="center" formatter="changeReview">评论内容</th>
   		<th field="commonDate" width="50" align="center">评论时间</th>
+  		<th field="state" width="50" align="center" formatter="formatState">评论状态</th>
   	</tr>
   </thead>
 </table>
 <div id="tb">
 	<div>
-		<a href="javascript:commentReview(1)" class="easyui-linkbutton" iconCls="icon-ok" plain="true">通过审核</a>
-		<a href="javascript:commentReview(2)" class="easyui-linkbutton" iconCls="icon-no" plain="true">驳回审核</a>
+		<a href="javascript:deleteReview()" class="easyui-linkbutton" iconCls="icon-remove" plain="true">删除评论信息</a>
 	</div>
+	<div>
+		<center><font color=red >**博客评论内容应弹窗查看 这里暂时忽略 后续完善</font></center>
+	</div>
+</div>
+
+<!-- 查看评论信息弹窗 modal=true 遮层只在dialog弹窗中有效 如果是datagrid 参考 https://www.cnblogs.com/s09122289/p/4569766.html -->
+<div id="dlg" class="easyui-dialog" style="width:1024px; height:500px;padding: 10px 20px"
+	modal=true
+	closed="true" buttons="#dlg-button">
+	<form id="fm" method="post">
+		<table cellspacing="10px">
+			<tr>
+				<td>博客名称：</td>
+				<td>
+					<input type="text" id="blogName"  />
+				</td>
+			</tr>
+			<tr>
+				<td align="top">评论信息：</td>
+				<td>
+					<textarea rows="18" cols="116" id="content"></textarea>
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+<div id="dlg-button">
+	<a href="javascript:closedDlg()" class="easyui-linkbutton" iconCls="icon-cancel" plain="true">关闭</a>
 </div>
 </body>
 </html>

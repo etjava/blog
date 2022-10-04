@@ -49,4 +49,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="add" parameterType="Comment">
 		insert into t_comments values(null,#{userAddr},#{blog.id},#{content},now(),0)
 	</insert>
+	
+	<delete id="delete" parameterType="Integer">
+		delete from t_comments where id=#{id}
+	</delete>
 </mapper> 

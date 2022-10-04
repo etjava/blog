@@ -37,4 +37,9 @@ public class CommentServiceImpl implements CommentService {
 		return commentMapper.update(comment);
 	}
 
+	@Override
+	public Integer delete(Integer id) {
+		return commentMapper.delete(id);
+	}
+
 }

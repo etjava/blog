@@ -1,5 +1,6 @@
 package com.etjava.controller.admin;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -76,6 +77,27 @@ public class AdminCommentController {
 		}
 		
 		logger.info("批量审核评论功能 "+jsonObject);
+		ResponseUtil.write(response, jsonObject);
+	}
+	
+	@RequestMapping("/delete")
+	public void delete(@RequestParam(value="ids",required = true) String ids,
+			HttpServletResponse response) throws Exception {
+		String[] data = ids.split(",");
+		int[] array = Arrays.asList(data).stream().mapToInt(Integer::parseInt).toArray();
+		System.out.println(array);
+		Integer total=0;
+		for(int i=0;i<data.length;i++) {
+			total = commentService.delete(Integer.valueOf(data[i]));
+		}
+		
+		JSONObject jsonObject = new JSONObject();
+		if(total>0) {
+			jsonObject.put("success", true);
+		}else {
+			jsonObject.put("success", false);
+		}
+		logger.info("删除评论信息 id in "+data);
 		ResponseUtil.write(response, jsonObject);
 	}
 }

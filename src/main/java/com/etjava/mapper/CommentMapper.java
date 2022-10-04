@@ -15,4 +15,6 @@ public interface CommentMapper {
 	
 	Integer update(Comment comment);
 	
+	Integer delete(Integer id);
+	
 }

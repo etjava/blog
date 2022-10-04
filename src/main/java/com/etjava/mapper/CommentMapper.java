@@ -11,4 +11,8 @@ public interface CommentMapper {
 
 	Integer add(Comment comment);
 	
+	Integer total(Map<String,Object> map);
+	
+	Integer update(Comment comment);
+	
 }

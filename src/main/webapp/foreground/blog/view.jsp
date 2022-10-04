@@ -22,7 +22,12 @@
     	}else{
     		$.post("${pageContext.request.contextPath}/comment/save.html",{"content":content,'imageCode':imageCode,'blog.id':'${blog.id}'},function(result){
     			if(result.success){
+    				// 重新加载当前页面
+    				//window.location.reload();
     				commonUtil.message("评论已提成成功，审核通过后显示！","success");
+    				$("#content").val('');
+    				$("#imageCode").val('');
+    				
     			}else{
     				alert(result.errorInfo);
     			}
@@ -86,6 +91,8 @@
 
 .data_list .commentDatas{
 	padding: 10px;
+	word-break:break-all; 
+	width:100%;
 }
 
 .data_list .commentDatas .comment{

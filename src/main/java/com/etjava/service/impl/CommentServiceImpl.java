@@ -19,14 +19,22 @@ public class CommentServiceImpl implements CommentService {
 	
 	@Override
 	public List<Comment> list(Map<String, Object> map) {
-		// TODO Auto-generated method stub
 		return commentMapper.list(map);
 	}
 
 	@Override
 	public Integer add(Comment comment) {
-		// TODO Auto-generated method stub
 		return commentMapper.add(comment);
+	}
+
+	@Override
+	public Integer total(Map<String, Object> map) {
+		return commentMapper.total(map);
+	}
+
+	@Override
+	public Integer update(Comment comment) {
+		return commentMapper.update(comment);
 	}
 
 }

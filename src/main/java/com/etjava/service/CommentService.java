@@ -10,4 +10,8 @@ public interface CommentService {
 	List<Comment> list(Map<String,Object> map);
 	
 	Integer add(Comment comment);
+	
+	Integer total(Map<String,Object> map);
+	
+	Integer update(Comment comment);
 }

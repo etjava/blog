@@ -50,6 +50,16 @@
 			}
 		});
 	}
+	
+	function modifyBlog(){
+		var selectedRows=$("#dg").datagrid("getSelections");
+		if(selectedRows.length!=1){
+			$.messager.alert("系统提示","请选择一条要修改的博客！");
+			return;
+		}
+		var row = selectedRows[0];
+		window.parent.openTab('修改博客','modifyBlog.jsp?id='+row.id,'icon-writeblog');
+	}
 </script>
 </head>
 <body style="margin: 1px">

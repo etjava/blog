@@ -145,7 +145,7 @@
 				<c:when test="${keywords==null }"></c:when>
 				<c:otherwise>
 					<c:forEach var="keyword" items="${keywords }">
-						&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:;"><strong>${keyword }</strong></a>
+						&nbsp;&nbsp;&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/blog/search.html?keyword=${keyword }"><strong>${keyword }</strong></a>
 					</c:forEach>
 				</c:otherwise>
 			</c:choose>

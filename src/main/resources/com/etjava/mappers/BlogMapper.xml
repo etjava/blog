@@ -61,7 +61,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</select>
 	
-	<select id="findbyId" parameterType="Integer" resultType="Blog">
+	<select id="findbyId" parameterType="Integer" resultMap="BlogResult">
 		select * from t_blog where id=#{id}
 	</select>
 	
@@ -71,6 +71,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="clickHit!=null">
 				clickHit=#{clickHit},
 			</if>
+			<if test="title!=null and title!='' ">
+				title=#{title},
+			</if>
+			<if test="summary!=null and summary!='' ">
+				summary=#{summary},
+			</if>
+			<if test="blogType.id!=null ">
+				typeId=#{blogType.id},
+			</if>
+			<if test="content!=null and content!='' ">
+				content=#{content},
+			</if>
+			<if test="keyword!=null and keyword!='' ">
+				keyword=#{keyword},
+			</if>
+			
 			<if test="replyHit!=null">
 				replyHit=#{replyHit},
 			</if>

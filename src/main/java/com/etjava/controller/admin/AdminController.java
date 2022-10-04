@@ -7,7 +7,6 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.lucene.index.IndexWriter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,6 +49,8 @@ public class AdminController {
 			index.addIndex(blog);// 创建分词 用于全文检索
 		}else {
 			// update
+			total = blogService.update(blog);
+			index.updateIndex(blog);
 		}
 		
 		JSONObject result = new JSONObject();
@@ -106,6 +107,19 @@ public class AdminController {
 		}
 		
 		ResponseUtil.write(response, jsonObject);
+	}
+	
+	/**
+	 * 	根据ID获取博客信息
+	 * @param id
+	 * @param response
+	 * @throws Exception
+	 */
+	@RequestMapping("/findById")
+	public void findById(@RequestParam(value="id",required = true) String id,HttpServletResponse response) throws Exception{
+		Blog blog = blogService.findbyId(Integer.valueOf(id));
+		JSONObject result = JSONObject.fromObject(blog);
+		ResponseUtil.write(response, result);
 	}
 	
 }

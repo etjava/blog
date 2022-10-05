@@ -64,6 +64,26 @@
 			}
 		});
 	}
+	
+	function refreshSystem(){
+		$.post("${pageContext.request.contextPath}/sys/refresh.html",
+				{},function(result){
+            if(result.success){
+                alert("缓存刷新成功！");
+                resultValue();
+            }else{
+                alert("缓存刷新失败！");
+            }
+        },"json");
+	}
+	
+	function logout(){
+		$.messager.confirm("系统提示","您确定要退出系统吗?",function(r){
+			if(r){
+				window.location.href="${pageContext.request.contextPath}/admin/user/logout.do";
+			}
+		});
+	}
 </script>
 </head>
 <body class="easyui-layout">

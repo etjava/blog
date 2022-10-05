@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.etjava.bean.Status;
 import com.etjava.bean.Users;
 import com.etjava.service.UsersService;
 import com.etjava.util.DateUtil;

@@ -26,4 +26,9 @@ public class UsersServiceImpl implements UsersService{
 		return usersMapper.findById(id);
 	}
 
+	@Override
+	public Integer update(Users user) {
+		return usersMapper.update(user);
+	}
+
 }

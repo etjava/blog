@@ -26,6 +26,8 @@ import com.etjava.util.StringUtil;
 @Controller
 @RequestMapping("/blog")
 public class BlogController {
+	
+	
 
 	@Resource
 	private BlogService blogService;

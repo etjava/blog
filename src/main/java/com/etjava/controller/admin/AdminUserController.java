@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.etjava.bean.Status;
 import com.etjava.bean.Users;
 import com.etjava.service.UsersService;
+import com.etjava.util.CryptographyUtil;
 import com.etjava.util.DateUtil;
 import com.etjava.util.ResponseUtil;
 
@@ -73,7 +75,8 @@ public class AdminUserController {
 		StringBuffer buf = new StringBuffer();
 		if(total>0) {
 			buf.append("<script language='javascript' >")
-			.append("alert('修改成功')")
+			.append("alert('修改成功');")
+			.append("window.parent.$('#tabs').tabs('close', '修改个人信息');")
 			.append("</script>");
 		}else {
 			buf.append("<script language='javascript' >")
@@ -81,5 +84,19 @@ public class AdminUserController {
 			.append("</script>");
 		}
 		return buf.toString();
+	}
+	
+	@RequestMapping("/updatePassword")
+	public void updatePassword(Users user,HttpServletResponse response) throws Exception {
+		user.setPassword(CryptographyUtil.md5(user.getPassword(),"etjava"));
+		Integer total = userService.update(user);
+		JSONObject result = new JSONObject();
+		if(total>0) {
+			result.put("success", true);
+		}else {
+			result.put("success", false);
+			result.put("errorInfo",Status.ERROR_CODE.getName());
+		}
+		ResponseUtil.write(response, result);
 	}
 }

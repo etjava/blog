@@ -25,7 +25,45 @@
 			});
 		}
 	}
+	
+	function openPasswordModifyDialog(){
+		$("#dlg").dialog("open").dialog("setTitle","修改密码");
+	}
 
+	function closedDlg(){
+		$("#dlg").dialog("close");
+		$("#userName").val('');
+		$("#password").val('');
+		$("#newPassword").val('');
+	}
+	
+	function save(){
+		$("#fm").form("submit",{
+			url:"${pageContext.request.contextPath}/admin/user/updatePassword.do",
+			onSubmit:function(){
+				var newPassword=$("#password").val();
+				var newPassword2=$("#newPassword").val();
+				if(!$(this).form("validate")){
+					return false;
+				}
+				if(newPassword!=newPassword2){
+					$.messager.alert("系统提示","两次密码不一致！");
+					return false;
+				}
+				return true;
+			},
+			success:function(result){
+				var result2 = eval('('+result+')');
+				if(result2.success){
+					$.messager.alert("系统提示","密码修改成功 下次登录生效");
+					closedDlg();
+				}else{
+					$.messager.alert("系统提示",result2.errorInfo);
+					return;
+				}
+			}
+		});
+	}
 </script>
 </head>
 <body class="easyui-layout">
@@ -80,5 +118,36 @@
 	Copyright © 2012-2026
 </div>
 
+<div id="dlg" class="easyui-dialog" style="width:600px; height:250px;padding: 10px 20px"
+	modal=true
+	closed="true" buttons="#dlg-button">
+	<form id="fm" method="post">
+		<table cellspacing="10px">
+			<tr>
+				<td>用户名：</td>
+				<td>
+					<input type="hidden" id="id" name="id" value="${currentUser.id }" />
+					<input type="text" style="width:400px;height:25px;" id="userName" value="${currentUser.userName }" readonly="readonly" />
+				</td>
+			</tr>
+			<tr>
+				<td>新密码：</td>
+				<td>
+					<input type="password" style="width:400px;height:25px;"  id="password" name="password" class="easyui-validatebox" required="true" />
+				</td>
+			</tr>
+			<tr>
+				<td>确认新密码：</td>
+				<td>
+					<input type="password" style="width:400px;height:25px;"  id="newPassword" name="newPassword" class="easyui-validatebox" required="true" />
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
+<div id="dlg-button">
+	<a href="javascript:save()" class="easyui-linkbutton" iconCls="icon-ok" plain="true">保存</a>
+	<a href="javascript:closedDlg()" class="easyui-linkbutton" iconCls="icon-cancel" plain="true">关闭</a>
+</div>
 </body>
 </html>

@@ -39,7 +39,7 @@ var ue = UE.getEditor('profile',{
             // form方式提交表单内容
             //$("#pf").val(profile);// 将值放到隐藏域中提交 因为编辑器中的内容无法通过表单直接提交 可以通过ajax方式提交
             $("#fm1").submit();
-            resultValue();
+            setTimeout("asdsadsa",2000);
         }
     }
     
@@ -47,6 +47,7 @@ var ue = UE.getEditor('profile',{
         $("#nickName").val("");
         $("#sign").val("");
         UE.getEditor('profile').setContent('');
+       // 放在Controller中拼接 window.parent.$('#tabs').tabs('close', '修改个人信息');// main.jsp中设置的tab页名称
     }
 </script>
 </head>

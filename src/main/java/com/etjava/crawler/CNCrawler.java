@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.ParseException;
@@ -43,9 +45,12 @@ import net.sf.ehcache.Status;
 public class CNCrawler {
 	
 	private static CrawlerBlogService crawlerBlogService;
+	
+	private static String realPath;
 
-	public CNCrawler(CrawlerBlogService crawlerBlogService){
+	public CNCrawler(CrawlerBlogService crawlerBlogService,String realPath){
 		this.crawlerBlogService = crawlerBlogService;
+		this.realPath=realPath;
 		parseHome();
 	}
 	
@@ -156,7 +161,6 @@ public class CNCrawler {
 			//System.out.println(url);
 			
 			
-			
 			// 判断是否抓取过当前链接 如果抓取过了 则本次舍弃执行
 			if(cache.get(url)!=null) {
 				logger.info("已抓取当前链接博客信息 " + URL);
@@ -259,7 +263,7 @@ public class CNCrawler {
 			logger.error(link + " - 未获取到博客内容");
 			return;
 		}
-		
+		// 获取带有html标签的文章内容
 		String content = contents.get(0).html();
 		String content2 = EmojiParser.removeAllEmojis(content);
 		//System.out.println("content - "+content2);
@@ -349,13 +353,15 @@ public class CNCrawler {
 							
 							// common-io.FileUtils .copyToFile 直接将文件下载到本地指定目录
 							String uuid = UUID.randomUUID().toString();
+							// 图片在项目中的位置
+							String fileURI = DateUtil.currentDatePath()+"/"+uuid+"."+b;
 							// 图片保存的地址
-							String newPath = PropertiesUtil.getValue("imageFilePath")+DateUtil.currentDatePath()+"/"+uuid+"."+b;
+							//String newPath = PropertiesUtil.getValue("imageFilePath")+fileURI;
 							
-							FileUtils.copyToFile(is,new File(newPath));
+							FileUtils.copyToFile(is,new File(realPath+"static/blogImages/"+fileURI));
 							
 							// 封装图片信息返回map
-							map.put(url, newPath);
+							map.put(url, PropertiesUtil.getValue("imageUrl")+fileURI);
 						} catch (UnsupportedOperationException | IOException e) {
 							e.printStackTrace();
 						}

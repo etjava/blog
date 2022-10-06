@@ -18,7 +18,7 @@
 				<span class="summary" style="word-break:break-all; width:100%;">${blog.summary }...</span>
 				
 				<c:forEach var="image" items="${blog.imageList }">
-					<a href="/blog/articles/${blog.id }.html">${image }</a>
+					<a href="/blog/articles/${blog.id}.html">${image }</a>
 						&nbsp;&nbsp;
 				</c:forEach>
 				

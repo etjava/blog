@@ -18,4 +18,12 @@ public interface CrawlerBlogService {
 	Integer delete(Integer id);
 	
 	Integer insert(CrawlerBlog blog);
+	
+	CrawlerBlog findById(Integer id);
+	
+	// 上一篇博客
+	CrawlerBlog lastBlog(Integer id);
+	
+	// 上一篇博客
+	CrawlerBlog nextBlog(Integer id);
 }

@@ -152,7 +152,7 @@ public class IndexController {
 			// Jsoup 解析内容中图片信息 (内容是带有html标签的)
 			Document doc = Jsoup.parse(blogInfo);
 			// 解析img元素中后缀为jpg的元素    不加[src$=.jpg] 表示获取所有img标签
-			Elements elements = doc.select("img[src$=.jpg]");
+			Elements elements = doc.select("img[src$=.png]");
 			for(int i=0;i<elements.size();i++) {
 				if(i==3) { // 最多只选三张图片
 					break; 
@@ -164,14 +164,14 @@ public class IndexController {
 		}
 		
 		mav.addObject("pageCode",
-				PageUtil.genPagination(req.getContextPath()+"/index.html", 
-						blogService.total(map), Integer.parseInt(page)
+				PageUtil.genPagination(req.getContextPath()+"/reprint.html", 
+						crawlerBlogService.total(map), Integer.parseInt(page)
 						, 10, parm.toString()));
 		
 		
 		
 		mav.addObject("blogList", list);
-		mav.addObject("pageTitle","Music - ETJAVA BLOG");
+		mav.addObject("pageTitle","REPRINTED - ETJAVA BLOG");
 		mav.addObject("mainPage","foreground/crawler/list.jsp");
 		mav.setViewName("template");
 		return mav;

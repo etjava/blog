@@ -20,6 +20,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<association property="blogType" column="typeId" select="com.etjava.mapper.BlogTypeMapper.findById"></association>
 	</resultMap>
 	
+	
+		<select id="lastBlog" parameterType="Integer" resultMap="CrawlerBlogResult">
+		select * from t_crawlerblog where id &lt; #{id} order by id desc limit 1
+		</select>
+		
+		<select id="nextBlog" parameterType="Integer" resultMap="CrawlerBlogResult">
+		select * from t_crawlerblog where id &gt; #{id} order by id limit 1
+		</select>
+	
+	<select id="findById" parameterType="Integer" resultMap="CrawlerBlogResult">
+		select * from t_crawlerblog where id=#{t_crawlerblog}
+	</select>
+	
 	<select id="list" parameterType="Map" resultMap="CrawlerBlogResult">
 		select * from t_crawlerblog
 		<where>
@@ -54,11 +67,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</select>
 	
-	<insert id="add" parameterType="Link" >
+	<insert id="add" parameterType="CrawlerBlog" >
 		insert into t_crawlerblog values(null,#{title},null,null,0,0,#{content},100,null,0,#{originalUrl},now())
 	</insert>
 	
-	<update id="update" parameterType="Link">
+	<update id="update" parameterType="CrawlerBlog">
 		update t_crawlerblog 
 		<set>
 			<if test="clickHit!=null">

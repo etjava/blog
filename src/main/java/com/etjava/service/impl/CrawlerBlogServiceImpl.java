@@ -53,4 +53,22 @@ public class CrawlerBlogServiceImpl implements CrawlerBlogService {
 		return crawlerBlogMapper.insert(blog);
 	}
 
+	@Override
+	public CrawlerBlog findById(Integer id) {
+		// TODO Auto-generated method stub
+		return crawlerBlogMapper.findById(id);
+	}
+
+	@Override
+	public CrawlerBlog lastBlog(Integer id) {
+		// TODO Auto-generated method stub
+		return crawlerBlogMapper.lastBlog(id);
+	}
+
+	@Override
+	public CrawlerBlog nextBlog(Integer id) {
+		// TODO Auto-generated method stub
+		return crawlerBlogMapper.nextBlog(id);
+	}
+
 }

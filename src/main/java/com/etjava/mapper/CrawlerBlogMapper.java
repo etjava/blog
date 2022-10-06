@@ -17,5 +17,13 @@ public interface CrawlerBlogMapper {
 	
 	Integer delete(Integer id);
 	
+	CrawlerBlog findById(Integer id);
+	
 	Integer insert(CrawlerBlog blog);
+	
+	// 上一篇博客
+	CrawlerBlog lastBlog(Integer id);
+	
+	// 上一篇博客
+	CrawlerBlog nextBlog(Integer id);
 }

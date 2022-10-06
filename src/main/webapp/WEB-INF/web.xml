@@ -86,5 +86,4 @@
 	<listener>
 		<listener-class>com.etjava.service.impl.InitComponent</listener-class>
 	</listener>
-	
 </web-app>

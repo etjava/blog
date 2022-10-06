@@ -130,7 +130,7 @@ public class IndexController {
 		map.put("releaseDateStr", releaseDateStr);
 		map.put("typeId", typeId);
 		ModelAndView mav = new ModelAndView();
-		List<CrawlerBlog> list = crawlerBlogService.list(null);
+		List<CrawlerBlog> list = crawlerBlogService.list(map);
 		
 		
 		

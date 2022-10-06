@@ -288,12 +288,19 @@ public class CNCrawler {
 		blog.setOriginalUrl(link);
 		
 		// 保存到数据库中
-		Integer total = crawlerBlogService.add(blog );
+		Integer total = 0;
+		try {
+			total = crawlerBlogService.add(blog );
+		} catch (Exception e) {
+			logger.error(link+"  数据保存失败",e);
+			e.printStackTrace();
+		}
+		
+		
 		if(total>0) {
 			logger.info(link+"  数据保存成功");
 			// 将链接加入到缓存中
             cache.put(new net.sf.ehcache.Element(link, link));
-            total = 0;
 		}else {
 			logger.error(link+"  数据保存失败");
 		}
@@ -330,6 +337,13 @@ public class CNCrawler {
 		
 		Map<String,String> map = new HashMap<>();
 		for(String url:imgList) {
+			
+			// 剔除小图标的抓取
+			String s = url.substring(url.length()-4, url.length());
+			if(s.contains("gif")) {
+				continue;
+			}
+			
 			// 创建get方式请求
 			HttpGet httpGet = new HttpGet(url);
 			httpGet.setConfig(config);

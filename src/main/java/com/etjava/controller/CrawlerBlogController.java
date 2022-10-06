@@ -1,9 +1,7 @@
 package com.etjava.controller;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -48,6 +46,8 @@ public class CrawlerBlogController {
 			}
 //			blog.setClickHit(blog.getClickHit()+1);
 //			crawlerBlogService.update(blog);
+			
+			
 			mav.addObject("blog",blog);
 			mav.addObject("pageCode", this.getUpAndDownPageCode(crawlerBlogService.lastBlog(id), crawlerBlogService.nextBlog(id), request.getServletContext().getContextPath()));
 			mav.addObject("pageTitle",blog.getTitle()+" - ETJAVA Blog");

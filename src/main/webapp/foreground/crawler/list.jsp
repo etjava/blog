@@ -15,6 +15,9 @@
 			<li style="margin-bottom: 30px">
 				<span class="date"><a href="${pageContext.request.contextPath}/crawler/blog/articles/${blog.id }.html"><fmt:formatDate value="${blog.releaseDate }" type="date" pattern="yyyy年MM月dd日" />  </a></span>
 				<span class="title"><a href="${pageContext.request.contextPath}/crawler/blog/articles/${blog.id }.html">${blog.title }</a></span>
+				<span class="summary">
+					<a href="${blog.originalUrl }" target="_blank">转自互联网</a>
+				</span>
 				<span class="summary" style="word-break:break-all; width:100%;">${blog.summary }...</span>
 				
 				<c:forEach var="image" items="${blog.imageList }">
@@ -24,7 +27,7 @@
 				
 				 
 				 
-				 <span class="info">发表于 <fmt:formatDate value="${blog.releaseDate }" type="date" pattern="yyyy-MM-dd HH:mm" /> 阅读(${blog.clickHit }) 评论(${blog.replyHit }) </span>
+				 <span class="info">发表于 <fmt:formatDate value="${blog.releaseDate }" type="date" pattern="yyyy-MM-dd HH:mm" /> 阅读(${blog.clickHit }) </span>
 			</li>
 			<hr style="height:5px;border:none;border-top:1px dashed gray;padding-bottom:  10px;" />
 		</c:forEach>

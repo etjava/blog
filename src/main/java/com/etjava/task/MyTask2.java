@@ -17,8 +17,8 @@ public class MyTask2 {
 	  /**
 	   * 启动时执行一次，之后每隔2秒执行一次 
 	   */
-	  @Scheduled(fixedRate = 1000*12)  
-	  public void print() { 
-	    System.out.println("print method 2");
-	  }
+//	  @Scheduled(fixedRate = 1000*12)  
+//	  public void print() { 
+//	    System.out.println("print method 2");
+//	  }
 }

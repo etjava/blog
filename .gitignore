@@ -4,5 +4,5 @@
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
 .settings/
-#.gitignore
+.gitignore
 target/

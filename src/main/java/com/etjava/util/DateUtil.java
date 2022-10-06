@@ -18,6 +18,15 @@ public class DateUtil {
 	}
 	
 	/**
+	 * 日期格式路径
+	 */
+	public static String currentDatePath() {
+		Date date = new Date();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+		return format.format(date);
+	}
+	
+	/**
 	 * @param str
 	 * @param format
 	 * @return

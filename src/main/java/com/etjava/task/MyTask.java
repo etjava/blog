@@ -1,12 +1,20 @@
 package com.etjava.task;
 
+import javax.annotation.Resource;
+
+import com.etjava.crawler.CNCrawler;
+import com.etjava.service.CrawlerBlogService;
+
 public class MyTask {
 
+	@Resource
+	private CrawlerBlogService crawlerBlogService;
+	
 	public void show() { 
-	    System.out.println("show method 1"); 
+	    new CNCrawler(crawlerBlogService);
 	  } 
 	 
-	  public void print() { 
-	    System.out.println("print method 1"); 
-	  } 
+//	  public void print() { 
+//	    System.out.println("print method 1"); 
+//	  } 
 }

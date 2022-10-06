@@ -28,6 +28,7 @@
 			      <ul class="nav navbar-nav">
 			        <li><a href="${pageContext.request.contextPath}/blogger/about.html"><font color="#FFF"><strong>About</strong></font></a></li>
 			        <li><a href="${pageContext.request.contextPath}/download.html"><font color="#FFF"><strong>Download</strong></font></a></li>
+			        <li><a href="${pageContext.request.contextPath}/reprint.html"><font color="#FFF"><strong>Reprinted</strong></font></a></li>
 			        <li><a href="${pageContext.request.contextPath}/music.html"><font color="#FFF"><strong>Music</strong></font></a></li>
 			      </ul>
 			      <form action="${pageContext.request.contextPath}/blog/search.html" 

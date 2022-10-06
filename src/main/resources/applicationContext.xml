@@ -20,9 +20,10 @@
   	
   	
   	<task:scheduled-tasks> 
-		<!-- 这里表示的是每隔五秒执行一次 -->
-		<task:scheduled ref="myTask" method="show" cron="*/5 * * * * ?" /> 
-	    <task:scheduled ref="myTask" method="print" cron="*/10 * * * * ?"/> 
+		<!-- 这里表示的是每隔30分钟执行一次  -->
+		<task:scheduled ref="myTask" method="show" cron="0 0/30 * * * ? " /> 
+		<!-- 这里表示的是每隔10秒执行一次 -->
+	    <!-- <task:scheduled ref="myTask" method="print" cron="*/10 * * * * ?"/>  -->
 	</task:scheduled-tasks> 
 	 
 	  <!-- 自动扫描的包名 -->

@@ -35,6 +35,7 @@ import org.apache.lucene.store.FSDirectory;
 
 import com.etjava.bean.CrawlerBlog;
 import com.etjava.util.DateUtil;
+import com.etjava.util.PropertiesUtil;
 import com.etjava.util.StringUtil;
 /**
  * 	 全文检索
@@ -54,7 +55,8 @@ public class CrawlerLucene {
 	 * @throws Exception
 	 */
 	private IndexWriter getWriter()throws Exception{
-		dir=FSDirectory.open(Paths.get("C://crawlerlucene"));
+		String path = PropertiesUtil.getValue("lucenePath1");
+		dir=FSDirectory.open(Paths.get(path));
 		SmartChineseAnalyzer analyzer=new SmartChineseAnalyzer();
 		IndexWriterConfig iwc=new IndexWriterConfig(analyzer);
 		IndexWriter writer=new IndexWriter(dir, iwc);

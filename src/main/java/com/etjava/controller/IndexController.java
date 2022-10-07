@@ -129,6 +129,7 @@ public class IndexController {
 		map.put("size", pageBean.getPageSize());
 		map.put("releaseDateStr", releaseDateStr);
 		map.put("typeId", typeId);
+		map.put("state", 1);// 取审核通过的数据
 		ModelAndView mav = new ModelAndView();
 		List<CrawlerBlog> list = crawlerBlogService.list(map);
 		

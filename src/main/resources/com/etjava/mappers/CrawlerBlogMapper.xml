@@ -39,6 +39,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="typeId!=null and typeId!='' ">
 				and typeId=#{typeId}
 			</if>	
+			<if test="state!=null ">
+				and state=#{state}
+			</if>
 			<if test="title!=null and title!='' ">
 				and title like #{title}
 			</if>
@@ -58,6 +61,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="typeId!=null and typeId!='' ">
 				and typeId=#{typeId}
 			</if>	
+			<if test="state!=null ">
+				and state=#{state}
+			</if>
 			<if test="title!=null and title!='' ">
 				and title like #{title}
 			</if>
@@ -83,7 +89,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="summary!=null and summary!='' ">
 				summary=#{summary},
 			</if>
-			<if test="blogType.id!=null ">
+			<if test="blogType!=null and blogType.id!=null ">
 				typeId=#{blogType.id},
 			</if>
 			<if test="content!=null and content!='' ">

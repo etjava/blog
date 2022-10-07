@@ -11,7 +11,6 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/jquery-easyui-1.3.3/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/static/jquery-easyui-1.3.3/locale/easyui-lang-zh_CN.js"></script>
 <script type="text/javascript">
-
 	function openTab(text,url,iconCls){
 		if($("#tabs").tabs("exists",text)){
 			$("#tabs").tabs("select",text);
@@ -115,6 +114,11 @@
 		<div title="博客管理"  data-options="iconCls:'icon-bkgl'" style="padding:10px;">
 			<a href="javascript:openTab('写博客','writeBlog.jsp','icon-writeblog')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-writeblog'" style="width: 150px;">写博客</a>
 			<a href="javascript:openTab('博客信息管理','blogManage.jsp','icon-bkgl')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-bkgl'" style="width: 150px;">博客信息管理</a>
+		</div>
+		<div title="转载文章管理"  data-options="iconCls:'icon-reprintedmanage'" style="padding:10px;">
+			<a href="javascript:openTab('已发布文章管理','releaseCrawlerManage.jsp','icon-reprintedblog')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-reprintedblog'" style="width: 150px;">已发布文章管理</a>
+			<a href="javascript:openTab('被驳回文章管理','blogRejectCrawlerManage.jsp','icon-reprintedmanage')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-reprintedmanage'" style="width: 150px;">被驳回文章管理</a>
+			<a href="javascript:openTab('未审核文章管理','blogCrawlerManage.jsp','icon-reprintedmanage')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-reprintedmanage'" style="width: 150px;">未审核文章管理</a>
 		</div>
 		<div title="博客类别管理" data-options="iconCls:'icon-bklb'" style="padding:10px">
 			<a href="javascript:openTab('博客类别信息管理','blogTypeManage.jsp','icon-bklb')" class="easyui-linkbutton" data-options="plain:true,iconCls:'icon-bklb'" style="width: 150px;">博客类别信息管理</a>

@@ -128,3 +128,9 @@
 .icon-link{
 	background:url('usericons/link.png') no-repeat center center;
 }
+.icon-reprintedblog{
+	background:url('usericons/reprinted.png') no-repeat center center;
+}
+.icon-reprintedmanage{
+	background:url('usericons/reprinted_manage.png') no-repeat center center;
+}

@@ -53,7 +53,7 @@ public class UsersController {
 	public ModelAndView about(HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
 		
-		mav.addObject("pageTitle","About");
+		mav.addObject("pageTitle","About - ETJAVA Blog");
 		mav.addObject("mainPage", "foreground/blog/info.jsp");
 		mav.setViewName("template");
 		return mav;

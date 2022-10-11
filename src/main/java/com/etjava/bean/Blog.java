@@ -23,6 +23,7 @@ public class Blog {
 	private BlogType blogType;
 	private Integer blogCount;// 博客数量
 	private String releaseDateStr;
+	private String contentNoTag; // 不带html标签的内容 lucence索引使用
 	
 	// 存放博客内容中包含的图片信息 用来展示缩略图
 	private List<String> imageList = new LinkedList<>();
@@ -123,11 +124,22 @@ public class Blog {
 	public void setImageList(List<String> imageList) {
 		this.imageList = imageList;
 	}
+	
+
+	public String getContentNoTag() {
+		return contentNoTag;
+	}
+
+	public void setContentNoTag(String contentNoTag) {
+		this.contentNoTag = contentNoTag;
+	}
 
 	@Override
 	public String toString() {
 		return "Blog [id=" + id + ", title=" + title + ", summary=" + summary + ", releaseDate=" + releaseDate
 				+ ", clickHit=" + clickHit + ", replyHit=" + replyHit + ", content=" + content + ", keyword=" + keyword
-				+ ", blogType=" + blogType + ", blogCount=" + blogCount + ", releaseDateStr=" + releaseDateStr + "]";
+				+ ", blogType=" + blogType + ", blogCount=" + blogCount + ", releaseDateStr=" + releaseDateStr
+				+ ", contentNoTag=" + contentNoTag + ", imageList=" + imageList + "]";
 	}
+
 }

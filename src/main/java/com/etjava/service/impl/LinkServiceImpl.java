@@ -22,4 +22,24 @@ public class LinkServiceImpl implements LinkService {
 		return linkMapper.list(map);
 	}
 
+	@Override
+	public Integer add(Link link) {
+		return linkMapper.add(link);
+	}
+
+	@Override
+	public Integer update(Link link) {
+		return linkMapper.update(link);
+	}
+
+	@Override
+	public Integer total(Map<String, Object> map) {
+		return linkMapper.total(map);
+	}
+
+	@Override
+	public Integer delete(Integer id) {
+		return linkMapper.delete(id);
+	}
+
 }

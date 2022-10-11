@@ -1,6 +1,7 @@
 package com.etjava.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -24,6 +25,36 @@ public class BlogTypeServiceImpl implements BlogTypeService {
 	@Override
 	public BlogType findById(Integer id) {
 		return bligTypeMapper.findById(id);
+	}
+
+	@Override
+	public List<BlogType> list(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return bligTypeMapper.list(map);
+	}
+
+	@Override
+	public Integer add(BlogType blogtype) {
+		// TODO Auto-generated method stub
+		return bligTypeMapper.add(blogtype);
+	}
+
+	@Override
+	public Integer delete(Integer id) {
+		// TODO Auto-generated method stub
+		return bligTypeMapper.delete(id);
+	}
+
+	@Override
+	public Integer update(BlogType blogtype) {
+		// TODO Auto-generated method stub
+		return bligTypeMapper.update(blogtype);
+	}
+
+	@Override
+	public Integer total(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return bligTypeMapper.total(map);
 	}
 
 }

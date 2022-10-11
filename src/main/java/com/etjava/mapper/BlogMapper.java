@@ -30,4 +30,16 @@ public interface BlogMapper {
 	Blog findbyId(Integer id);
 	
 	Integer update(Blog blog);
+	
+	// 上一篇博客
+	Blog lastBlog(Integer id);
+	
+	// 上一篇博客
+	Blog nextBlog(Integer id);
+	
+	Integer add(Blog blog);
+	
+	Integer delete(Integer id);
+	
+	Integer countByTypeId(Integer typeId);
 }

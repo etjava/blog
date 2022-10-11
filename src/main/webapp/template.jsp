@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/blog.css">
 <script src="${pageContext.request.contextPath}/static/bootstrap3/js/jquery-1.11.2.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/bootstrap3/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/static/js/alt.js"></script>
 <title>${pageTitle }</title>
 <style type="text/css">
 	html {
@@ -21,6 +22,8 @@
 		padding-bottom: 40px;
 		background-color: #3F6371;
 		overflow: hidden;
+		/* background-image: url('${pageContext.request.contextPath}/static/images/Java-vert-wht-resized-v2.svg');
+		background-size:cover; */
 	}
 </style>
 </head>

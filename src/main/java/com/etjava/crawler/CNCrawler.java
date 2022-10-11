@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-
 import org.apache.commons.io.FileUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.ParseException;
@@ -29,12 +28,13 @@ import org.slf4j.LoggerFactory;
 import com.etjava.bean.CrawlerBlog;
 import com.etjava.service.CrawlerBlogService;
 import com.etjava.util.DateUtil;
+import com.etjava.util.JedisPoolUtil;
 import com.etjava.util.PropertiesUtil;
 import com.vdurmont.emoji.EmojiParser;
 
-import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Status;
+import redis.clients.jedis.Jedis;
 
 /**
  * CNBLOG文章
@@ -60,20 +60,22 @@ public class CNCrawler {
 	private static Integer total = 0;
 	
 	// 缓存管理器
-	private static CacheManager manager;
+	//private static CacheManager manager;
 	// 缓存对象
-	private static Cache cache;
+	///private static Cache cache;
+	
+	private static final Jedis jedis = JedisPoolUtil.instance().getResource();
+	
 	
 	/**
 	 * 解析首页内容
 	 */
 	private static void parseHome() {
 		logger.info("第["+(total++)+"]次爬取开始 "+URL);
-		manager = CacheManager.create(PropertiesUtil.getValue("cacheFilePath"));
+		//manager = CacheManager.create(PropertiesUtil.getValue("cacheFilePath"));
 		// 获取cache对象
-		cache = manager.getCache("cnblog");
-		
-		
+		//cache = manager.getCache("cnblog");
+		jedis.select(5);
 		
 		
 		// 获取HttpClient实例
@@ -131,11 +133,12 @@ public class CNCrawler {
 			e.printStackTrace();
 		}
 		
-		if(cache.getStatus()==Status.STATUS_ALIVE) {
-			// 刷新缓存 否则无法写入到文件中
-			cache.flush();
-		}
-		manager.shutdown();
+//		if(cache.getStatus()==Status.STATUS_ALIVE) {
+//			// 刷新缓存 否则无法写入到文件中
+//			cache.flush();
+//		}
+//		manager.shutdown();
+		JedisPoolUtil.releace(jedis);
 		
 		logger.info("第["+(total++)+"]次爬取结束 "+URL);
 	}
@@ -161,7 +164,8 @@ public class CNCrawler {
 			
 			
 			// 判断是否抓取过当前链接 如果抓取过了 则本次舍弃执行
-			if(cache.get(url)!=null) {
+			//if(cache.get(url)!=null) {
+			if(jedis.get(url)!=null) {
 				logger.info("已抓取当前链接博客信息 " + URL);
 				continue;
 			}else {
@@ -300,7 +304,8 @@ public class CNCrawler {
 		if(total>0) {
 			logger.info(link+"  数据保存成功");
 			// 将链接加入到缓存中
-            cache.put(new net.sf.ehcache.Element(link, link));
+           // cache.put(new net.sf.ehcache.Element(link, link));
+            jedis.set(link,link);
 		}else {
 			logger.error(link+"  数据保存失败");
 		}
